@@ -1,7 +1,13 @@
 How to build OpenCV with Contributions for Android:
 
-ATTENTION: NDK version r16b does not work with cmake-android. Manually install NDK version r15c (location: "C:\Users\<USER_NAME>\AppData\Local\Android\Sdk\ndk-bundle")
+ATTENTION:
+NDK version r16b does not work with cmake-android. Manually install NDK version r15c (location: "C:\Users\<USER_NAME>\AppData\Local\Android\Sdk\ndk-bundle")
 https://developer.android.com/ndk/downloads/index.html
+OpenCV only supports SDK Tools up to version 25.2.5. Download the tools from the links provided below for your platform and replace the tools directory under
+Sdk root dir.
+Linux: https://dl.google.com/android/repository/tools_r25.2.5-linux.zip
+Mac: https://dl.google.com/android/repository/tools_r25.2.5-macosx.zip
+Windows: https://dl.google.com/android/repository/tools_r25.2.5-windows.zip
 
 general hints:
 - cd into a directory where you clone opencv and opencv_contrib
@@ -50,7 +56,7 @@ prerequisites:
 	-install cmake
 	-install minGW
 	
-	- Java and Ant are necessary if you want to build all opencv modules in one big shared object file (libopencv_java3.so). In this case set cmake variable BUILD_SHARD_LIBS=false. You will get many individual static libaries (*.a) for every opencv module and one big libopencv_java3.so shared library containing all modules. You can use the one libopencv_java3.so for dynamic linking or the single static libs for static linking. If you prefer single dynamic library files set BUILD_SHARD_LIBS=true.
+	- Java and Ant are necessary if you want to build all opencv modules in one big shared object file (libopencv_java3.so). In this case set cmake variable BUILD_SHARED_LIBS=false. You will get many individual static libaries (*.a) for every opencv module and one big libopencv_java3.so shared library containing all modules. You can use the one libopencv_java3.so for dynamic linking or the single static libs for static linking. If you prefer single dynamic library files set BUILD_SHARED_LIBS=true.
 		-download and install python 2.6+
 		-install jdk 6+
 			-Set JAVA_HOME environment variable. 
