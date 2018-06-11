@@ -10,36 +10,13 @@ How to build OpenCV with Contributions for iOS:
   - Press Generate
 - open a terminal and cd to opencv/platforms/ios/
   - You must have cmake installed for the terminal (e.g. with sudo port install cmake)
-  - chmod +x build_framework.py
-  - if you want to reduce the framework size, remove unneeded architectures (e.g. armv7, armv7s, i386) build_framework.py (currently only arm64 is built)
-    I did it like this:
+  - Copy the files build_framework_release.py and build_framework_debug.py into the opencv/platforms/ folder
+  - run ./build_framework_release.py --opencv ../.. --contrib ../../../opencv_contrib --without matlab ./build_release
+  - run ./build_framework_debug.py --opencv ../.. --contrib ../../../opencv_contrib --without matlab ./build_debug
 
-    #b = iOSBuilder(args.opencv, args.contrib, args.dynamic, args.bitcodedisabled, args.without,
-    #    [
-    #        (["armv7", "arm64"], "iPhoneOS"),
-    #    ] if os.environ.get('BUILD_PRECOMMIT', None) else
-    #    [
-    #        (["armv7", "armv7s", "arm64"], "iPhoneOS"),
-    #        (["i386", "x86_64"], "iPhoneSimulator"),
-    #    ])
-        
-    b = iOSBuilder(args.opencv, args.contrib, args.dynamic, args.bitcodedisabled, args.without,
-        [
-            (["arm64"], "iPhoneOS"),
-        ] if os.environ.get('BUILD_PRECOMMIT', None) else
-        [
-            (["arm64"], "iPhoneOS"),
-            (["x86_64"], "iPhoneSimulator"),
-        ])
+- the single lib files will be saved in the folder build_{config}/build/build-arm64-iphoneos/lib/{config}
 
-
-
-  - run ./build_framework.py --opencv ../.. --contrib ../../../opencv_contrib ./build
-  - the result will be saved in the folder build/opencv2.framework
-
-
-- Copy the file opencv/platforms/ios/build/opencv2.framework to SLProject/_lib/prebuilt/OpenCV/ios
-- Copy all files from the folder opencv/include to SLProject/lib_SLExternal/opencv/include
-- Copy all files from the folder opencv_contrib/modules/***/include folder to SLProject/lib_SLExternal/opencv/include
+- Copy all *.a files opencv/platforms/ios/build_{config}/build-arm64-iphoneos/lib/{config} to SLProject/_lib/prebuilt/OpenCV/ios/{config}
+- Copy all files from the folder opencv/platforms/ios/build_{config}/install/include to SLProject/lib_SLExternal/opencv/include
 
 
